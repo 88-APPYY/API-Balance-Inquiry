@@ -1,6 +1,8 @@
 # API Balance Tracker
 
 统一查询与管理 AI 大模型 API 余额及 Token 用量趋势的开源工具。
+<img width="2475" height="1333" alt="image" src="https://github.com/user-attachments/assets/58db6b9b-0ec0-4ca7-84cf-c6eb93051e83" />
+<img width="1715" height="1283" alt="image" src="https://github.com/user-attachments/assets/f3dbbb7c-4946-4452-86d9-22c8f0016ad6" />
 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
