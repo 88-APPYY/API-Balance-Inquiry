@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ApiKey {
+  id             String   @id @default(cuid())
+  provider       String
+  label          String
+  keyPrefix      String
+  encryptedKey   String
+  salt           String
+  encryptedCookie String?  // 加密的平台 Cookie（可选，仅 platform API 需要）
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  queryRecords    QueryRecord[]
+  dailySnapshots  DailyUsageSnapshot[]
+}
+
+model QueryRecord {
+  id        String   @id @default(cuid())
+  apiKeyId  String
+  provider  String
+  queryType String   // "balance" | "usage"
+  response  String
+  createdAt DateTime @default(now())
+
+  apiKey ApiKey @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+
+  @@index([apiKeyId])
+  @@index([provider])
+  @@index([createdAt])
+}
+
+model DailyUsageSnapshot {
+  id          String   @id @default(cuid())
+  apiKeyId    String
+  date        String   // YYYY-MM-DD
+  totalTokens Float    // 当月累计 Token
+  cost        Float    // 当月累计费用
+  createdAt   DateTime @default(now())
+
+  apiKey ApiKey @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+
+  @@unique([apiKeyId, date])
+  @@index([apiKeyId])
+  @@index([date])
+}
