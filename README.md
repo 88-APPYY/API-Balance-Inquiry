@@ -40,7 +40,7 @@
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/your-username/api-balance-tracker.git
+git clone https://github.com/88-APPYY/api-balance-tracker.git
 cd api-balance-tracker
 ```
 
@@ -158,3 +158,6 @@ ProviderRegistry.register(ProviderType.OpenAI, MyProvider);
 ## License
 
 MIT © [Your Name]
+
+## 联系
+wangz1224@foxmail.com
